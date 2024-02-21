@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>larger number</title>
+    <script src="jquery-3.6.1.js"></script>
+    <!-- for  fontstyling -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka+One&family=Itim&family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+     .head{
+        width: 100%;
+        height: 12vh;
+        background: darkmagenta;
+        box-sizing: border-box;
+        font-family: 'Itim', cursive;
+        font-size: 20px;
+        color: antiquewhite;
+     }
+     h2{
+        margin: 0%;
+        padding: 0%;
+
+        box-sizing: border-box;
+    }
+    #forhead{
+        position: relative;
+        top: 5px;
+        padding-left: 10px  ;
+        box-sizing: border-box;
+    }
+    .lnum{
+        width: 332px;
+        height: 220px;
+        box-shadow: 0px 0px 15px 8px purple;
+        margin-top: 30px;
+        margin-left: 400px;
+        padding-top: 60px;
+        padding-left: 55px;
+        padding-right: 55px;
+        border-radius: 10px;
+        font-family: 'Fredoka One', cursive;
+        background: rgb(178, 113, 178);
+        box-sizing: border-box;
+    }
+    .winnum{
+        width: 800px;
+        height: 50px;
+        box-shadow: 0px 0px 15px 8px rgb(128, 0, 53);
+        margin-top: 15px;
+        margin-left: 150px;
+         padding-top: 12px;
+        /* padding-left: 250px; */
+        text-align: center;
+        border-radius: 10px;
+        font-family: 'Fredoka One', cursive;
+        font-size: 20px;
+        background: rgb(197, 34, 110);
+        box-sizing: border-box;
+    }
+    .ddd{
+        height: 40px;
+        width: 300px;
+        border-radius: 8px;
+        margin-left: 400px;
+        margin-top: 5px;
+        border: 3px solid violet;
+    }
+    .fbb{
+        margin-left: 400px;
+        font-family: 'Bebas Neue', cursive;
+        font-size: 20px;
+    }
+    #play{
+        background: plum;
+        width: 100px;
+        border-radius: 8px;
+        height: 30px;
+        border: none;
+        font-size: 15px;
+        margin-left: 500px;
+        font-size: 15px;
+        font-family: 'Righteous', cursive;
+    }
+    img{
+        float: left;
+        border-radius: 10px;
+    }
+    .result{
+        width: 100%;
+        height: 600px;
+    }
+    </style>
+</head>
+<body>
+   
+    <div class="head">
+        <img src="numberr.png" alt="" width="5%" height="100%">
+        <h2 id="forhead">larger number</h2>
+    </div><br>
+    <b class="fbb">PLAYER1:</b>
+    <input type="text" class="ddd" maxlength="15"><br><br>
+    <b class="fbb">PLAYER2:</b>
+    <input type="text" class="ddd" maxlength="15"><br><br>
+    <b class="fbb">PLAYER3:</b> <br>
+    <input type="text" class="ddd"  maxlength="15"><br><br>
+    <b class="fbb">PLAYER4:</b> <br>
+    <input type="text" class="ddd" maxlength="15"><br><br>
+    <input type="submit"  id="play" value="play">
+    <div class="result">
+    <div class="lnum"><h2></h2></div>
+    <br>
+    <div class="winnum"></div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        //fade outing box
+        $(".lnum,.winnum").fadeOut();
+
+        //applying event on formm
+        $(".ddd").blur(function (){
+            $(this).css({"background":"none","color":"white"});
+        });
+        $(".ddd").focus(function (){
+            $(this).css({"background-color":"#9932CC","color":"white","font-size":"20px"});
+        });
+
+        //main functioning
+        $("#play").click(function (event) {
+         //player
+            var p1 =  $("input[type='text']").eq(0).val();
+            var p2 =  $("input[type='text']").eq(1).val();
+            var p3 =  $("input[type='text']").eq(2).val();
+            var p4 =  $("input[type='text']").eq(3).val();
+
+        //getting length
+        var p1l = p1.length;
+        var p2l = p2.length;
+        var p3l = p3.length;
+        var p4l = p4.length;
+
+        //converting number
+         var tonum1 = parseFloat(p1);
+         var tonum2 = parseFloat(p2);
+         var tonum3 = parseFloat(p3);
+         var tonum4 = parseFloat(p4);
+        
+        //generating
+        var mx = Math.max(tonum1,tonum2,tonum3,tonum4
+        );
+        
+    
+        //condition
+        if(p1l < 10 || !isFinite(tonum1)  || p2l < 10 || !isFinite(tonum2)  || p4l < 10 || !isFinite(tonum3)  || p4l < 10 ||
+        !isFinite(tonum4) ){
+            $(this).event.preventDefault();
+
+        }
+
+        if(tonum1 > tonum2 && tonum1 > tonum3 && tonum1 > tonum4
+        ){
+            $(".lnum").fadeIn(3000);
+            $(".lnum h2").text("most largest number "+mx);
+            $(".winnum").fadeIn(3000);
+             $(".winnum").html("the winner is <b>PLAYER1</b>");
+        
+
+          
+        }else if(tonum2 > tonum1 && tonum2 > tonum3 && tonum2 > tonum4
+        ){
+             $(".lnum").fadeIn(3000);
+             $(".lnum h2").text("most largest number "+mx);
+             $(".winnum").fadeIn(3000);
+             $(".winnum").html("the winner is <b>PLAYER2</b>");
+        }else if(tonum3 > tonum1 && tonum3 > tonum2 && tonum3 > tonum4
+        ){
+            $(".lnum").fadeIn(3000);
+            $(".lnum h2").text("most largest number "+mx);
+            $(".winnum").fadeIn(3000);
+             $(".winnum").html("the winner is <b>PLAYER3</b>");
+        }else if(tonum4
+         > tonum1 && tonum4
+         > tonum2 && tonum4
+         > tonum3){
+            $(".lnum").fadeIn(3000);
+             $(".lnum h2").text("most largest number "+mx);
+             $(".winnum").fadeIn(3000);
+            $(".winnum").html("the winner is <b>PLAYER4</b>");
+        }else{
+            $(".winnum").html("<b>sorry: </b> any 2 or more than 2 player's value went same , play again let's play! ");
+        }
+
+        
+
+       
+      return false;
+    })
+    })
+</script>
+</body>
+</html>
